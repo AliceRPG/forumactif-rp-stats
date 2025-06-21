@@ -2,7 +2,10 @@ name: Update RP Stats
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Tous les jours à 2h UTC
+    # Minuit Paris (22h UTC la veille)
+    - cron: '0 22 * * *'
+    # Midi Paris (10h UTC)
+    - cron: '0 10 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,6 +15,10 @@ jobs:
     steps:
       - name: Récupérer le repo
         uses: actions/checkout@v3
+
+      - name: Configurer remote pour push
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/AliceRPG/forumactif-rp-stats.git
 
       - name: Installer Node.js
         uses: actions/setup-node@v3
@@ -39,9 +46,3 @@ jobs:
           git push origin HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Configurer remote pour push
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/AliceRPG/forumactif-rp-stats.git
-
-
