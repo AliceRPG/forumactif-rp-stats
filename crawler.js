@@ -49,19 +49,19 @@ async function crawlCategory(url) {
 }
 
 async function crawlTopic(url) {
-  console.log(`→ Topic : ${url}`);
-  let pageOffset = 0;
-  let keepGoing = true;
-const topicMatch = url.match(/\/t(\d+)(?:p\d+)?-(.+)$/);
-if (!topicMatch) return console.warn(`⛔ URL de topic non reconnue : ${url}`);
+    console.log(`→ Topic : ${url}`);
+    let pageOffset = 0;
+    let keepGoing = true;
+    const topicMatch = url.match(/\/t(\d+)(?:p\d+)?-(.+)$/);
+    if (!topicMatch) return console.warn(`⛔ URL de topic non reconnue : ${url}`);
 
-const topicId = topicMatch[1];
-const slug = topicMatch[2];
+    const topicId = topicMatch[1];
+    const slug = topicMatch[2];
 
-while (keepGoing) {
-  const pageSuffix = pageOffset === 0 ? '' : `p${pageOffset}`;
-  const pageUrl = `${BASE_URL}/t${topicId}${pageSuffix ? pageSuffix : ''}-${slug}`;
-  console.log(`   ↳ Page : ${pageUrl}`);
+    while (keepGoing) {
+    const pageSuffix = pageOffset === 0 ? '' : `p${pageOffset}`;
+    const pageUrl = `${BASE_URL}/t${topicId}${pageSuffix ? pageSuffix : ''}-${slug}`;
+    console.log(`   ↳ Page : ${pageUrl}`);
 
     const html = await fetchHTML(pageUrl);
     const $ = cheerio.load(html);
