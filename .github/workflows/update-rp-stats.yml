@@ -2,10 +2,7 @@ name: Update RP Stats
 
 on:
   schedule:
-    # Minuit Paris (22h UTC la veille)
-    - cron: '0 22 * * *'
-    # Midi Paris (10h UTC)
-    - cron: '0 10 * * *'
+    - cron: '*/30 * * * *'  # Toutes les 30 minutes
   workflow_dispatch:
 
 jobs:
